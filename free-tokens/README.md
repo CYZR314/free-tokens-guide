@@ -139,6 +139,13 @@ free-tokens/
 
 纯静态站，没有构建步骤。仓库只有一个目的：给 Cloudflare Pages 当源。改了 `data.json` 提交一次，网站几十秒后自动更新。
 
+**线上地址：<https://free-tokens-guide.pages.dev>**
+**源码仓库：<https://github.com/CYZR314/free-tokens-guide>**
+
+当前这套已经配好了：GitHub 仓库 `CYZR314/free-tokens-guide` 的 `main` 分支 → Cloudflare Pages 项目 `free-tokens-guide`（构建输出目录 `free-tokens`，框架 None，构建命令留空）。日常更新只需要改 `data.json` 再 `git push`，不用重新配置任何东西。
+
+下面这段是「从零重来一遍」的步骤，留着备查。
+
 ### 一次性配置
 
 **第 1 步：推到 GitHub**
