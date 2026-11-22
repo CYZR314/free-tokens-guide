@@ -1,0 +1,338 @@
+{
+  "site": {
+    "title": "免费 Tokens 白嫖攻略",
+    "subtitle": "FREE TOKENS",
+    "tagline": "收录真能到账的代金券和免费额度",
+    "intro": "这里只留真金白银的东西：注册就送的代金券、学生能领的大额券、长期免费的模型额度。没有「可能送」「大概有」，每一条都写清楚能领多少。额度与规则以官网为准，领之前去页面确认一眼。",
+    "updated": "2026-11-22",
+    "disclaimer": "本站只做入口整理和流程记录，不代领、不转卖、不提供任何账号。代金券与免费额度均由各平台发放，规则随时可能调整，以官网页面为准。",
+    "howToUpdate": "改 data.json 即可：加一条 items、调 level、改 note 和 guide。页面上的计数和排序都会自动跟着变。"
+  },
+  "apiGuide": {
+    "title": "API Key 接入示例",
+    "subtitle": "以 DSH（DeepSeek Harness）为例。换平台只改地址和模型名。",
+    "fields": [
+      { "label": "地址", "value": "https://maas.qianwenaiapi.com/compatible-mode/v1(一般控制台有，没有的问ai)" },
+      { "label": "协议", "value": "OpenAI 兼容" },
+      { "label": "模型", "value": "DeepSeek-V4.1-Flash-1017(右上角有获取可用模型)" },
+      { "label": "API Key", "value": "平台控制台创建后粘贴" }
+    ],
+    "steps": [
+      "在平台控制台建一个 API Key",
+      "DSH 里新增一条 OpenAI 兼容的服务商",
+      "填上面四项，保存后新开会话点击模型选择新接入的供应商的模型"
+    ]
+  },
+  "changelog": [
+    { "date": "2026-11-22", "text": "精简为 8 个真能领到钱的入口，去掉分类筛选，卡片上直接标额度" },
+    { "date": "2026-11-21", "text": "站点上线，改为 data.json 数据驱动，备注点开是完整领取攻略" }
+  ],
+  "items": [
+    {
+      "id": "aliyun-student",
+      "name": "阿里云 · 云工开物",
+      "url": "https://university.aliyun.com/buycenter/",
+      "domain": "university.aliyun.com",
+      "image": "images/aliyun-student.svg",
+      "badge": "学生专属",
+      "level": 5,
+      "credits": { "type": "voucher", "value": "¥300", "label": "学生认证后每 12 个月 1 张，有效期 1 年", "amount": 300 },
+      "note": "国内高校学生做完学生认证就能领 300 元优惠券，一年一张。目前最大金额代金券，可用几乎所有主流大模型",
+      "tags": ["学生认证", "300 元代金券", "每年一张"],
+      "guide": {
+        "summary": "目前全年金额最大的一张券，要求大学生身份，专科、本科、硕士、博士均可",
+        "steps": [
+          "注册阿里云账号，完成个人实名认证",
+          "打开「云工开物」学生权益页，点「立即领取」",
+          "按提示做学生认证：使用支付宝的学生认证，登录学信网认证",
+          "通过后再次领取券，点击右上角账户 → 卡券管理，能看到 300 元代金券"
+        ],
+        "usage": [
+          "在首页点击大模型，进入千问ai平台,或者直接浏览器搜索千问ai平台",
+          "登录阿里云同一账户",
+          "创建APIkey",
+          "登录你的agent添加模型"
+        ],
+        "models": [
+          "通义千问 Qwen 系列",
+          "DeepSeek-V4.1-Flash-1017",
+          "Kimi K3.1 Pro"
+        ],
+        "watch": [
+          "每人每 12 个月只能领 1 张，领完这一张就要等下一个周期",
+          "券有效期 1 年，到期未用自动作废，不折现也不能转让"
+        ]
+      }
+    },
+    {
+      "id": "siliconflow",
+      "name": "硅基流动 SiliconFlow",
+      "url": "https://cloud.siliconflow.cn/",
+      "domain": "cloud.siliconflow.cn",
+      "image": "images/siliconflow.svg",
+      "badge": "注册就送",
+      "level": 5,
+      "credits": { "type": "voucher", "value": "¥16", "label": "注册实名后到账，可再叠加邀请码", "amount": 16 },
+      "note": "国内接入最省事的一家。注册并实名后即送 16 元代金券，做推荐每邀请一名新人即可再获得16元代金券",
+      "tags": ["注册即送", "OpenAI 兼容", "可反复刷取"],
+      "guide": {
+        "summary": "流程最简易，无任何限制，注册即送16元额度，包含主流大模型",
+        "steps": [
+          "手机号注册，完成实名认证",
+          "进控制台「费用中心」，确认 16 元代金券已经到账",
+          "参与推荐官计划，每邀请一个人完成实名认证可再得一张16元代金券"
+        ],
+        "usage": [
+          "创建APIkey",
+          "登录你的agent添加模型"
+        ],
+        "models": [
+          "DeepSeek-V4.1-Flash-1017",
+          "通义千问 Qwen 系列"
+        ],
+        "watch": [
+          "代金券有效期180天",
+          "邀请码还能再获得代金券，但必须受邀人实名认证，仅注册账号不行"
+        ]
+      }
+    },
+    {
+      "id": "moonshot",
+      "name": "月之暗面 Kimi",
+      "url": "https://platform.kimi.com/",
+      "domain": "platform.kimi.com",
+      "image": "images/moonshot.svg",
+      "badge": "注册就送",
+      "level": 5,
+      "credits": { "type": "voucher", "value": "¥15", "label": "注册实名后到账，可用于全部模型", "amount": 15 },
+      "note": "Kimi 的官方开放平台，注册并实名后送 15 元代金券。上下文窗口 100 万 token，长文档和长代码一次喂进去不用切块。",
+      "tags": ["注册即送", "长上下文", "OpenAI 兼容"],
+      "guide": {
+        "summary": "同一个账号既能用 Kimi 网页版，也能拿 API Key 接进自己的 agent。",
+        "steps": [
+          "手机号注册平台账号，完成个人实名认证",
+          "进「用户中心」看余额，确认 15 元代金券已经到账",
+          "在 API Key 页面创建一个密钥"
+        ],
+        "usage": [
+          "base_url 填 https://api.moonshot.cn/v1",
+          "创建APIkey，接进你的agent",
+          "模型名填 kimi-k3.1-pro，先发一句「你好」跑通链路"
+        ],
+        "models": [
+          "Kimi K3.1 Pro",
+          "Kimi K3.1 Pro 高速版",
+          "Kimi K3"
+        ],
+        "watch": [
+          "15 元在旗舰模型上折不了多少 token，够跑通链路和小规模压测，别当长期额度",
+          "代金券的到账时间和有效期以用户中心显示为准，充值前先看一眼余额"
+        ]
+      }
+    },
+    {
+      "id": "bailian",
+      "name": "阿里云百炼（通义千问）",
+      "url": "https://bailian.console.aliyun.com/",
+      "domain": "bailian.console.aliyun.com",
+      "image": "images/bailian.svg",
+      "badge": "免费额度",
+      "level": 4,
+      "credits": { "type": "quota", "value": "100 万 tokens", "label": "新用户每个模型 100 万 tokens，180 天有效" },
+      "note": "通义千问全家桶的官方入口，新用户每个模型送 100 万 tokens，半年有效期，够把主流尺寸都试一遍。",
+      "tags": ["100 万 tokens", "通义千问", "180 天"],
+      "guide": {
+        "summary": "中文能力强，模型尺寸齐全，适合做选型对比。",
+        "steps": [
+          "用阿里云账号登录百炼控制台，首次进入会自动开通服务",
+          "在「模型广场」里看各模型各自的免费额度",
+          "创建 API Key 并保存",
+          "在「费用与成本」里盯住免费额度余量，别不知不觉切到付费"
+        ],
+        "usage": [
+          "base_url 填 https://dashscope.aliyuncs.com/compatible-mode/v1",
+          "创建APIkey，接进你的agent",
+          "先发一句「你好」跑通链路"
+        ],
+        "models": [
+          "Qwen-Max",
+          "Qwen-Plus",
+          "Qwen-Turbo"
+        ],
+        "watch": [
+          "免费额度按模型分别计算，不是账号总量",
+          "180 天到期作废，不会顺延"
+        ]
+      }
+    },
+    {
+      "id": "volcengine",
+      "name": "火山方舟（豆包）",
+      "url": "https://console.volcengine.com/ark",
+      "domain": "console.volcengine.com/ark",
+      "image": "images/volcengine.svg",
+      "badge": "免费额度",
+      "level": 4,
+      "credits": { "type": "quota", "value": "50 万 tokens", "label": "新用户每个模型 50 万 tokens" },
+      "note": "豆包系列加上 DeepSeek 等第三方模型都能在方舟里调，新用户每个模型 50 万 tokens 免费。",
+      "tags": ["豆包", "50 万 tokens", "多模型"],
+      "guide": {
+        "summary": "豆包 + 第三方模型一处调用，免费额度按模型给。",
+        "steps": [
+          "注册火山引擎账号并完成实名认证",
+          "进入「火山方舟」控制台，开通模型服务",
+          "在模型列表里逐个「开通」，免费额度会自动生效",
+          "创建 API Key"
+        ],
+        "usage": [
+          "从「API 调用示例」里复制 base_url，别手打",
+          "模型名填 doubao-... 或 deepseek-...，别填中文名字",
+          "创建APIkey，接进你的agent"
+        ],
+        "models": [
+          "豆包 Doubao 系列",
+          "DeepSeek 系列"
+        ],
+        "watch": [
+          "免费额度按模型单独计算，开通一个算一个",
+          "部分新模型或专用模型不参与免费赠送"
+        ]
+      }
+    },
+    {
+      "id": "modelscope",
+      "name": "魔搭 ModelScope",
+      "url": "https://modelscope.cn/",
+      "domain": "modelscope.cn",
+      "image": "images/modelscope.svg",
+      "badge": "每天免费",
+      "level": 4,
+      "credits": { "type": "quota", "value": "2000 次/天", "label": "绑定阿里云账号后每天免费调用" },
+      "note": "阿里系的开源模型社区，绑定阿里云账号后每天有 2000 次免费 API-Inference 调用，按次算不按 token。",
+      "tags": ["每天 2000 次", "开源模型", "不用充值"],
+      "guide": {
+        "summary": "额度按调用次数算，最适合反复试错。",
+        "steps": [
+          "注册魔搭账号，在设置里绑定阿里云账号",
+          "进入「API-Inference」页面，获取访问 token",
+          "在模型详情页看调用示例"
+        ],
+        "usage": [
+          "获取访问 token，接进你的agent",
+          "用 OpenAI 兼容地址调用",
+          "额度每天重置，当天用完等第二天"
+        ],
+        "models": [
+          "Qwen 开源系列",
+          "DeepSeek 开源系列",
+          "GLM 开源系列"
+        ],
+        "watch": [
+          "按次计算不按 token，长输入会被截断",
+          "高峰期排队，响应可能变慢"
+        ]
+      }
+    },
+    {
+      "id": "zhipu",
+      "name": "智谱 GLM",
+      "url": "https://bigmodel.cn/",
+      "domain": "bigmodel.cn",
+      "image": "images/zhipu.svg",
+      "badge": "免费模型",
+      "level": 3,
+      "credits": { "type": "quota", "value": "Flash 系列免费", "label": "轻量模型长期免费，新用户另有赠送额度" },
+      "note": "智谱的 Flash 系列轻量模型长期免费调用，注册还会送额度给旗舰模型用，中文语感好。",
+      "tags": ["Flash 免费", "中文强", "新用户赠送"],
+      "guide": {
+        "summary": "免费模型能长期用，旗舰模型靠赠送额度先试。",
+        "steps": [
+          "注册智谱开放平台账号，完成实名",
+          "在「API Key」页面创建密钥",
+          "模型名选 Flash 系列即可免费调用，先跑通链路"
+        ],
+        "usage": [
+          "base_url 填 https://open.bigmodel.cn/api/paas/v4",
+          "创建APIkey，接进你的agent",
+          "要试旗舰模型，先看账户里赠送额度还剩多少"
+        ],
+        "models": [
+          "Flash 系列（长期免费）",
+          "GLM 标准系列（用赠送额度）",
+          "GLM 旗舰系列（用赠送额度）"
+        ],
+        "watch": [
+          "免费模型有并发限制，别拿它扛生产流量",
+          "旗舰模型按 token 计费，赠送额度用完就开始扣钱"
+        ]
+      }
+    },
+    {
+      "id": "hunyuan",
+      "name": "腾讯混元",
+      "url": "https://cloud.tencent.com/product/hunyuan",
+      "domain": "cloud.tencent.com",
+      "image": "images/hunyuan.svg",
+      "badge": "免费模型",
+      "level": 3,
+      "credits": { "type": "quota", "value": "Lite 免费", "label": "hunyuan-lite 长期免费调用" },
+      "note": "混元的 Lite 版本长期免费，接口兼容 OpenAI 格式，接入成本低。",
+      "tags": ["Lite 免费", "OpenAI 兼容", "限 QPS"],
+      "guide": {
+        "summary": "拿来做轻量任务最省钱，重活还是得换大模型。",
+        "steps": [
+          "注册腾讯云账号并实名认证",
+          "开通「腾讯混元大模型」服务",
+          "在 API 密钥管理里创建 SecretId / SecretKey"
+        ],
+        "usage": [
+          "调用时模型名填 hunyuan-lite，走免费通道",
+          "用官方 SDK 或 OpenAI 兼容地址接入"
+        ],
+        "models": [
+          "hunyuan-lite（长期免费）",
+          "hunyuan 标准版（按 token 计费）",
+          "hunyuan 旗舰版（按 token 计费）"
+        ],
+        "watch": [
+          "Lite 能力有限，复杂推理和长文会明显掉链子",
+          "免费额度受 QPS 限制，并发一高就排队"
+        ]
+      }
+    },
+    {
+      "id": "aistudio",
+      "name": "Google AI Studio",
+      "url": "https://aistudio.google.com/",
+      "domain": "aistudio.google.com",
+      "image": "images/aistudio.svg",
+      "badge": "免费层",
+      "level": 3,
+      "credits": { "type": "quota", "value": "免费层", "label": "Gemini 按分钟 / 每天限速，不用信用卡" },
+      "note": "不用绑信用卡就能拿到 key，Gemini 免费层按每分钟和每天请求数限速，上下文窗口很长。",
+      "tags": ["免信用卡", "长上下文", "限速"],
+      "guide": {
+        "summary": "不花钱就能试长上下文能力。",
+        "steps": [
+          "用 Google 账号登录 Google AI Studio",
+          "点「Get API key」创建密钥，不需要绑卡",
+          "在模型列表里选一个支持免费层的 Gemini 模型"
+        ],
+        "usage": [
+          "创建APIkey，接进你的agent",
+          "按官方 SDK 或 REST 调用，注意 RPM / RPD",
+          "超限会返回 429，代码里加重试和降级"
+        ],
+        "models": [
+          "Gemini Flash 系列",
+          "Gemini Flash-Lite",
+          "Gemini Pro 系列（免费层额度更少）"
+        ],
+        "watch": [
+          "免费层的输入输出可能被用于改进产品，敏感数据别喂",
+          "按分钟和按天双重限速，跑批量任务要控速"
+        ]
+      }
+    }
+  ]
+}
