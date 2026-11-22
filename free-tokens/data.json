@@ -104,7 +104,7 @@
       "image": "images/moonshot.svg",
       "badge": "注册就送",
       "level": 5,
-      "credits": { "type": "voucher", "value": "¥15", "label": "注册实名后到账，可用于全部模型", "amount": 15 },
+      "credits": { "type": "voucher", "value": "¥15", "label": "注册实名后到账，可用于kimi系列模型", "amount": 15 },
       "note": "Kimi 的官方开放平台，注册并实名后送 15 元代金券。上下文窗口 100 万 token，长文档和长代码一次喂进去不用切块。",
       "tags": ["注册即送", "长上下文", "OpenAI 兼容"],
       "guide": {
