@@ -10,7 +10,7 @@
   },
   "apiGuide": {
     "title": "API Key 接入示例",
-    "subtitle": "以 DSH（DeepSeek Harness）为例。换平台只改地址和模型名。",
+    "subtitle": "以 DSH(DeepSeek Harness)为例。换平台只改地址和模型名。",
     "fields": [
       { "label": "地址", "value": "https://maas.qianwenaiapi.com/compatible-mode/v1(一般控制台有，没有的问ai)" },
       { "label": "协议", "value": "OpenAI 兼容" },
@@ -59,8 +59,8 @@
           "Kimi K3.1 Pro"
         ],
         "watch": [
-          "每人每 12 个月只能领 1 张，领完这一张就要等下一个周期",
-          "券有效期 1 年，到期未用自动作废，不折现也不能转让"
+          "代金券有效期 1 年",
+          "每人每 12 个月只能领 1 张，领完这一张就要等下一个周期"
         ]
       }
     },
@@ -111,22 +111,18 @@
         "summary": "同一个账号既能用 Kimi 网页版，也能拿 API Key 接进自己的 agent。",
         "steps": [
           "手机号注册平台账号，完成个人实名认证",
-          "进「用户中心」看余额，确认 15 元代金券已经到账",
-          "在 API Key 页面创建一个密钥"
+          "进「代金券管理」查看，确认 15 元代金券已经到账"
         ],
         "usage": [
-          "base_url 填 https://api.moonshot.cn/v1",
-          "创建APIkey，接进你的agent",
-          "模型名填 kimi-k3.1-pro，先发一句「你好」跑通链路"
+          "创建APIkey",
+          "登录你的agent添加模型"
         ],
         "models": [
           "Kimi K3.1 Pro",
-          "Kimi K3.1 Pro 高速版",
           "Kimi K3"
         ],
         "watch": [
-          "15 元在旗舰模型上折不了多少 token，够跑通链路和小规模压测，别当长期额度",
-          "代金券的到账时间和有效期以用户中心显示为准，充值前先看一眼余额"
+          "代金券有效期90天"
         ]
       }
     },
