@@ -134,7 +134,7 @@
       "domain": "www.deepseek.com",
       "image": "images/dsh.svg",
       "badge": "首登就送",
-      "level": 5,
+      "level": 4,
       "credits": { "type": "voucher", "value": "¥6", "label": "首次登录桌面端后到账", "amount": 6 },
       "note": "DeepSeek 官方的桌面端 Agent，装好登录 DeepSeek 账号，账户里直接多 6 元，能直接跑 agent 和工具调用。",
       "tags": ["注册即送", "桌面端", "DeepSeek"],
@@ -146,17 +146,17 @@
           "登录后到账户余额里确认 6 元已到账"
         ],
         "usage": [
-          "在平台控制台创建APIkey",
+          "创建APIkey",
           "DSH 里选 DeepSeek 服务商，填上 Key",
           "新开一个会话发句话试试"
         ],
         "models": [
-          "DeepSeek-V4.1-Flash",
-          "DeepSeek-V3.2"
+          "DeepSeek-V4.1-Flash-1017",
+          "deepseek-v4-pro"
         ],
         "watch": [
-          "6 元只够少量调用，长期用还是要充值",
-          "券的到账与有效期以平台账户页为准"
+          "代金券有效期7天",
+          "6 元只简单常识dsh功能，长期用还是要充值"
         ]
       }
     },
