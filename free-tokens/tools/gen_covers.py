@@ -12,6 +12,7 @@ PROVIDERS = [
     ("aliyun-student", "阿里云云工开物",       "#C2410C", "#F97316", "云", "university.aliyun.com"),
     ("siliconflow",  "硅基流动",              "#4C3CFF", "#7B61FF", "SF", "cloud.siliconflow.cn"),
     ("moonshot",     "月之暗面 Kimi",          "#111827", "#3A4150", "月", "platform.kimi.com"),
+    ("dsh",          "DeepSeek Harness",       "#2B4BF2", "#5C7CFF", "D",  "www.deepseek.com"),
     ("bailian",      "阿里云百炼",             "#E85D00", "#FFA23A", "百", "bailian.console.aliyun.com"),
     ("volcengine",   "火山方舟",              "#0E4FD1", "#4C8DFF", "火", "console.volcengine.com/ark"),
     ("modelscope",   "魔搭 ModelScope",       "#5A3FF5", "#8E7BFF", "MS", "modelscope.cn"),

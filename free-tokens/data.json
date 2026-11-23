@@ -4,7 +4,7 @@
     "subtitle": "FREE TOKENS",
     "tagline": "收录真能到账的代金券和免费额度",
     "intro": "这里只留真金白银的东西：注册就送的代金券、学生能领的大额券、长期免费的模型额度。没有「可能送」「大概有」，每一条都写清楚能领多少。额度与规则以官网为准，领之前去页面确认一眼。",
-    "updated": "2026-11-22",
+    "updated": "2026-11-23",
     "disclaimer": "本站只做入口整理和流程记录，不代领、不转卖、不提供任何账号。代金券与免费额度均由各平台发放，规则随时可能调整，以官网页面为准。",
     "howToUpdate": "改 data.json 即可：加一条 items、调 level、改 note 和 guide。页面上的计数和排序都会自动跟着变。"
   },
@@ -24,6 +24,7 @@
     ]
   },
   "changelog": [
+    { "date": "2026-11-23", "text": "新增 DeepSeek Harness（DSH）首次登录送 6 元代金券" },
     { "date": "2026-11-22", "text": "精简为 8 个真能领到钱的入口，去掉分类筛选，卡片上直接标额度" },
     { "date": "2026-11-21", "text": "站点上线，改为 data.json 数据驱动，备注点开是完整领取攻略" }
   ],
@@ -123,6 +124,39 @@
         ],
         "watch": [
           "代金券有效期90天"
+        ]
+      }
+    },
+    {
+      "id": "dsh",
+      "name": "DeepSeek Harness（DSH）",
+      "url": "https://www.deepseek.com/harness/",
+      "domain": "www.deepseek.com",
+      "image": "images/dsh.svg",
+      "badge": "首登就送",
+      "level": 5,
+      "credits": { "type": "voucher", "value": "¥6", "label": "首次登录桌面端后到账", "amount": 6 },
+      "note": "DeepSeek 官方的桌面端 Agent，装好登录 DeepSeek 账号，账户里直接多 6 元，能直接跑 agent 和工具调用。",
+      "tags": ["注册即送", "桌面端", "DeepSeek"],
+      "guide": {
+        "summary": "装桌面端、登录 DeepSeek 账号，首次登录到账 6 元额度。",
+        "steps": [
+          "到 DSH 官网下载桌面端安装包",
+          "装好后用 DeepSeek 账号登录",
+          "登录后到账户余额里确认 6 元已到账"
+        ],
+        "usage": [
+          "在平台控制台创建APIkey",
+          "DSH 里选 DeepSeek 服务商，填上 Key",
+          "新开一个会话发句话试试"
+        ],
+        "models": [
+          "DeepSeek-V4.1-Flash",
+          "DeepSeek-V3.2"
+        ],
+        "watch": [
+          "6 元只够少量调用，长期用还是要充值",
+          "券的到账与有效期以平台账户页为准"
         ]
       }
     },
