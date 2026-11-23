@@ -25,6 +25,12 @@ from datetime import datetime, timezone, timedelta
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 API = "https://api.github.com"
+
+for _s in (sys.stdout, sys.stderr):
+    try:
+        _s.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
 OWNER = "CYZR314"
 REPO = "free-tokens-guide"
 BRANCH = "main"
@@ -32,7 +38,11 @@ TOKEN_FILE = os.path.join(ROOT, ".secrets", "github_token")
 
 
 def say(msg=""):
-    print(msg, flush=True)
+    try:
+        print(msg, flush=True)
+    except UnicodeEncodeError:
+        print(msg.encode(sys.stdout.encoding or "utf-8", "replace")
+              .decode(sys.stdout.encoding or "utf-8", "replace"), flush=True)
 
 
 def die(msg):
@@ -148,20 +158,6 @@ def parse_commit(sha):
     return info
 
 
-def ensure_blob(blob_sha, cache):
-    if blob_sha in cache:
-        return
-    content = subprocess.run(["git", "cat-file", "blob", blob_sha],
-                             cwd=ROOT, capture_output=True).stdout
-    res = api("POST", "/repos/%s/%s/git/blobs" % (OWNER, REPO), {
-        "content": base64.b64encode(content).decode("ascii"),
-        "encoding": "base64",
-    }, token=TOKEN)
-    if res.get("sha") != blob_sha:
-        die("blob 校验失败：本地 %s，服务端 %s" % (blob_sha, res.get("sha")))
-    cache.add(blob_sha)
-
-
 def ls_tree(tree_sha):
     out = subprocess.run(["git", "ls-tree", "-r", "-t", "-z", tree_sha],
                          cwd=ROOT, capture_output=True).stdout
@@ -175,44 +171,63 @@ def ls_tree(tree_sha):
     return entries
 
 
-def ensure_tree(tree_sha, token, blobs, known):
-    """把 tree_sha 及它下面的子目录全部上传，返回 True/False(已存在)"""
-    if tree_sha in known:
-        return
-    if api("GET", "/repos/%s/%s/git/trees/%s" % (OWNER, REPO, tree_sha),
-           token=token, allow_404=True) is not None:
-        known.add(tree_sha)
-        return
+def ls_blobs(tree_sha):
+    """本地 tree -> {path: (mode, blob_sha)}，只看文件"""
+    return {path: (mode, sha) for mode, typ, sha, path in ls_tree(tree_sha) if typ == "blob"}
 
-    entries = ls_tree(tree_sha)
-    by_dir = {}
-    for mode, typ, sha, path in entries:
-        parent, _, base = path.rpartition("/")
-        by_dir.setdefault(parent, []).append((mode, typ, sha, base))
 
-    # 先文件：确保 blob 存在
-    for parent, items in by_dir.items():
-        for mode, typ, sha, base in items:
-            if typ == "blob":
-                ensure_blob(sha, blobs)
+def remote_tree(sha):
+    """远端 tree -> {path: (mode, sha)}，只看文件"""
+    if not sha:
+        return {}
+    res = api("GET", "/repos/%s/%s/git/trees/%s?recursive=1" % (OWNER, REPO, sha),
+              token=TOKEN)
+    out = {}
+    for e in res.get("tree", []):
+        if e.get("type") == "blob":
+            out[e["path"]] = (e.get("mode", "100644"), e["sha"])
+    return out
 
-    # 再目录：从最深的一层往上建
-    for parent in sorted(by_dir.keys(), key=lambda p: -p.count("/") if p else 1):
-        items = by_dir[parent]
-        body = []
-        for mode, typ, sha, base in items:
-            if typ == "tree":
-                ensure_tree(sha, token, blobs, known)
-                body.append({"path": base, "mode": "040000", "type": "tree", "sha": sha})
-            else:
-                m = mode if mode in ("100644", "100755", "120000") else "100644"
-                body.append({"path": base, "mode": m, "type": "blob", "sha": sha})
-        res = api("POST", "/repos/%s/%s/git/trees" % (OWNER, REPO),
-                  {"tree": body}, token=token)
-        if res.get("sha") != tree_sha:
-            die("tree 校验失败（%s）：本地 %s，服务端 %s"
-                % (parent or "<root>", tree_sha, res.get("sha")))
-    known.add(tree_sha)
+
+def upload_blobs(paths_shas):
+    for path, sha in paths_shas:
+        content = subprocess.run(["git", "cat-file", "blob", sha],
+                                 cwd=ROOT, capture_output=True).stdout
+        res = api("POST", "/repos/%s/%s/git/blobs" % (OWNER, REPO), {
+            "content": base64.b64encode(content).decode("ascii"),
+            "encoding": "base64",
+        }, token=TOKEN)
+        if res.get("sha") != sha:
+            die("blob 校验失败：%s 本地 %s，服务端 %s" % (path, sha, res.get("sha")))
+
+
+def build_tree(prev_tree_sha, commit_sha):
+    """以远端前一版 tree 为底，提交这一版改动，返回新 tree 的 sha"""
+    info = parse_commit(commit_sha)
+    new_map = ls_blobs(info["tree"])
+    base_map = remote_tree(prev_tree_sha)
+
+    add = [(p, v) for p, v in new_map.items()
+           if base_map.get(p, (None, None))[1] != v[1]]
+    if add:
+        upload_blobs(add)
+
+    entries = []
+    for path, (mode, sha) in add:
+        entries.append({"path": path, "mode": mode, "type": "blob", "sha": sha})
+    for path in base_map:
+        if path not in new_map:
+            entries.append({"path": path, "mode": "100644", "type": "blob",
+                            "sha": None})
+
+    if not entries:
+        return prev_tree_sha, len(add), 0
+
+    body = {"tree": entries}
+    if prev_tree_sha:
+        body["base_tree"] = prev_tree_sha
+    res = api("POST", "/repos/%s/%s/git/trees" % (OWNER, REPO), body, token=TOKEN)
+    return res["sha"], len(add), len(entries) - len(add)
 
 
 # ---------------- 主流程 ----------------
@@ -223,6 +238,16 @@ def main():
 
     if git_ok(["rev-parse", "--git-dir"]) is False:
         die("这里不是 git 仓库：%s" % ROOT)
+
+    # 0. 清掉 Windows 保留名垃圾文件（git 读不了 CON，会让 add 整个失败）
+    stray = os.path.join(ROOT, "CON")
+    if os.path.exists(stray):
+        try:
+            if os.path.getsize(stray) < 4096:
+                os.remove(stray)
+                say("· 已清理垃圾文件 CON")
+        except OSError:
+            pass
 
     # 1. 先把改动提交（如果有）
     git(["add", "-A"])
@@ -255,9 +280,14 @@ def main():
         ", ".join(c[:7] for c in pending)))
 
     # 3. 先试 git push（网络偶尔是通的，走它最省事）
-    for attempt in range(1, 4):
+    force_api = os.environ.get("FORCE_API") == "1"
+    for attempt in range(1, 4 if not force_api else 1):
+        if force_api:
+            say("· 强制走 API（FORCE_API=1）")
+            break
         say("· 尝试 git push（第 %d 次）…" % attempt)
-        p = subprocess.run(["git", "push", "origin", BRANCH],
+        url = "https://x-access-token:%s@github.com/%s/%s.git" % (TOKEN, OWNER, REPO)
+        p = subprocess.run(["git", "push", url, "HEAD:refs/heads/" + BRANCH],
                            cwd=ROOT, capture_output=True)
         if p.returncode == 0:
             say("✓ 上传成功（git push）")
@@ -271,14 +301,16 @@ def main():
     say("· github.com 连不上，改走 GitHub API 上传（api.github.com 是通的）…")
 
     # 4. 用 API 逐个提交
-    blobs, trees = set(), set()
+    prev_tree = parse_commit(remote)["tree"] if remote else None
     new_remote = remote
     for i, sha in enumerate(pending, 1):
         info = parse_commit(sha)
-        ensure_tree(info["tree"], TOKEN, blobs, trees)
+        tree_sha, adds, dels = build_tree(prev_tree, sha)
+        say("  · 改动：新增/修改 %d 个文件，删除 %d 个" % (adds, dels))
+        prev_tree = tree_sha
         body = {
             "message": info["message"],
-            "tree": info["tree"],
+            "tree": tree_sha,
             "parents": [new_remote] if new_remote else [],
         }
         if info.get("author"):

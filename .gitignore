@@ -15,3 +15,5 @@ Thumbs.db
 
 # 本地凭据，别提交
 .secrets/
+__pycache__/
+*.pyc
