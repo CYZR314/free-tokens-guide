@@ -210,7 +210,7 @@ def build_tree(prev_tree_sha, commit_sha):
     add = [(p, v) for p, v in new_map.items()
            if base_map.get(p, (None, None))[1] != v[1]]
     if add:
-        upload_blobs(add)
+        upload_blobs([(path, val[1]) for path, val in add])
 
     entries = []
     for path, (mode, sha) in add:
