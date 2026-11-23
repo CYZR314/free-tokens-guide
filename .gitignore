@@ -12,3 +12,6 @@ build/
 .DS_Store
 Thumbs.db
 .preview/
+
+# 本地凭据，别提交
+.secrets/
