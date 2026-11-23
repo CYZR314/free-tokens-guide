@@ -181,8 +181,7 @@
         ],
         "usage": [
           "base_url 填 https://dashscope.aliyuncs.com/compatible-mode/v1",
-          "创建APIkey，接进你的agent",
-          "先发一句「你好」跑通链路"
+          "创建APIkey，接进你的agent"
         ],
         "models": [
           "Qwen-Max",
