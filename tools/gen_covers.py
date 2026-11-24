@@ -1,11 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-生成站点封面图（SVG）。
-新增平台时：在 PROVIDERS 里加一行，然后 `python tools/gen_covers.py`。
+生成「免费 Tokens 白嫖攻略」站点的封面图（SVG），输出到 free-tokens/images/。
+新增平台时：在 PROVIDERS 里加一行，然后在仓库根目录跑 `python tools/gen_covers.py`。
 文字颜色会按底色亮度自动在深/浅之间切换，浅底色不会被白字糊掉。
 """
 import os
+import sys
+
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
 
 # id, 显示名, 主色, 辅色, 背景大字, 域名
 PROVIDERS = [
@@ -18,7 +24,6 @@ PROVIDERS = [
     ("modelscope",   "魔搭 ModelScope",       "#5A3FF5", "#8E7BFF", "MS", "modelscope.cn"),
     ("zhipu",        "智谱 GLM",              "#2A46D8", "#5B7BFF", "智", "bigmodel.cn"),
     ("hunyuan",      "腾讯混元",              "#0043A8", "#2F80ED", "混", "cloud.tencent.com"),
-    ("aistudio",     "Google AI Studio",     "#1A73E8", "#4FA3FF", "G",  "aistudio.google.com"),
 ]
 
 FONT = "system-ui, -apple-system, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', 'Noto Sans SC', sans-serif"
@@ -63,7 +68,8 @@ def _lum(hex_color):
 
 
 def main():
-    out_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "images")
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    out_dir = os.path.join(root, "free-tokens", "images")
     os.makedirs(out_dir, exist_ok=True)
     for pid, name, c1, c2, glyph, domain in PROVIDERS:
         n = len(name)

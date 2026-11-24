@@ -1,0 +1,66 @@
+{
+  "site": {
+    "title": "我的收藏夹",
+    "subtitle": "MY COLLECTION",
+    "tagline": "六个入口，一处常见。",
+    "intro": "把常用、常看、常维护的页面收在一处。内容全部由 data.json 驱动，改这里就能改整站。",
+    "updated": "2026-11-25",
+    "footnote": "个人站点 · 仅作收藏与索引使用"
+  },
+  "entries": [
+    {
+      "id": "tokens",
+      "title": "免费 Tokens 白嫖攻略",
+      "desc": "阿里云、硅基流动、月之暗面、DSH 等真能到账的代金券与免费额度，附领取步骤和踩坑提醒。",
+      "href": "tokens/view.html",
+      "image": "images/tokens.svg",
+      "tag": "已上线",
+      "status": "ready"
+    },
+    {
+      "id": "resume",
+      "title": "个人简历",
+      "desc": "教育、经历、技能与项目，一页看完；改 resume/data.json 就能换成你自己的内容。",
+      "href": "resume/index.html",
+      "image": "images/resume.svg",
+      "tag": "已上线",
+      "status": "ready"
+    },
+    {
+      "id": "b3",
+      "title": "入口三",
+      "desc": "还没想好放什么，先占个位置。想好之后在 data.json 里改标题和链接即可。",
+      "href": "blank/index.html?slot=b3",
+      "image": "images/b3.svg",
+      "tag": "待建设",
+      "status": "blank"
+    },
+    {
+      "id": "b4",
+      "title": "入口四",
+      "desc": "占位页。可以是作品集、常用工具或者别的什么。",
+      "href": "blank/index.html?slot=b4",
+      "image": "images/b4.svg",
+      "tag": "待建设",
+      "status": "blank"
+    },
+    {
+      "id": "b5",
+      "title": "入口五",
+      "desc": "占位页。想放什么都行，改 data.json 的 href 就指过去了。",
+      "href": "blank/index.html?slot=b5",
+      "image": "images/b5.svg",
+      "tag": "待建设",
+      "status": "blank"
+    },
+    {
+      "id": "b6",
+      "title": "入口六",
+      "desc": "占位页。",
+      "href": "blank/index.html?slot=b6",
+      "image": "images/b6.svg",
+      "tag": "待建设",
+      "status": "blank"
+    }
+  ]
+}

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>我的收藏夹</title>
+<meta name="description" content="个人收藏页：免费 Tokens 攻略、个人简历，以及更多入口。">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --bg-elev: #ffffff;
+    --bg-soft: #f0f2f5;
+    --ink: #14161c;
+    --ink-2: #4a5160;
+    --ink-3: #8a91a0;
+    --line: #e5e7ec;
+    --line-strong: #d5d8e0;
+    --accent: #2b4bf2;
+    --accent-soft: #eef1fe;
+    --radius: 16px;
+    --shadow: 0 1px 2px rgba(16, 20, 32, .04), 0 8px 24px rgba(16, 20, 32, .05);
+    --shadow-lg: 0 2px 6px rgba(16, 20, 32, .06), 0 18px 40px rgba(16, 20, 32, .10);
+  }
+  html[data-theme="dark"] {
+    --bg: #0d0f14;
+    --bg-elev: #161922;
+    --bg-soft: #1b1f29;
+    --ink: #eef1f6;
+    --ink-2: #b6bcc9;
+    --ink-3: #7f8798;
+    --line: #262b35;
+    --line-strong: #333a47;
+    --accent: #7c8cff;
+    --accent-soft: #1c2140;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .35);
+    --shadow-lg: 0 2px 6px rgba(0, 0, 0, .35), 0 18px 40px rgba(0, 0, 0, .45);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                 "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+
+  /* 顶栏 */
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--bg) 86%, transparent);
+    backdrop-filter: saturate(140%) blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner { display: flex; align-items: center; gap: 16px; height: 62px; }
+  .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .brand-mark {
+    width: 30px; height: 30px; border-radius: 9px; flex: 0 0 auto;
+    display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px;
+    background: linear-gradient(135deg, var(--accent), #8b5cf6);
+  }
+  .brand-text { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
+  .brand-text b { font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .brand-text small { font-size: 10.5px; letter-spacing: .14em; color: var(--ink-3); }
+  .topmeta { margin-left: auto; font-size: 12.5px; color: var(--ink-3); white-space: nowrap; }
+  .topmeta b { color: var(--ink-2); font-weight: 600; }
+  .theme-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    height: 32px; padding: 0 12px; border-radius: 999px; cursor: pointer;
+    font-size: 12.5px; color: var(--ink-2); background: var(--bg-elev);
+    border: 1px solid var(--line-strong);
+    transition: border-color .15s, color .15s, background .15s;
+  }
+  .theme-btn:hover { border-color: var(--ink-3); color: var(--ink); }
+  .theme-btn svg { width: 14px; height: 14px; }
+
+  /* 首屏 */
+  .hero { padding: 54px 0 8px; }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .kicker::before { content: ""; width: 22px; height: 1px; background: var(--line-strong); }
+  h1 {
+    margin: 14px 0 0; font-size: clamp(28px, 4.2vw, 42px); line-height: 1.22;
+    letter-spacing: -.02em; font-weight: 780;
+  }
+  .hero p { margin: 14px 0 0; max-width: 620px; color: var(--ink-2); font-size: 15px; }
+  .stats { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 26px; }
+  .stat b { display: block; font-size: 24px; font-weight: 760; letter-spacing: -.01em; }
+  .stat span { font-size: 12px; color: var(--ink-3); }
+
+  /* 入口网格 */
+  .grid {
+    display: grid; gap: 22px; margin: 38px 0 0;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+  .card {
+    display: flex; flex-direction: column; overflow: hidden;
+    background: var(--bg-elev); border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); border-color: var(--line-strong); }
+  .card-cover { position: relative; display: block; background: var(--bg-soft); }
+  .card-cover img { display: block; width: 100%; height: auto; aspect-ratio: 640 / 400; object-fit: cover; }
+  .cover-fallback {
+    display: grid; place-items: center; aspect-ratio: 640 / 400;
+    font-size: 40px; font-weight: 800; color: #fff;
+    background: linear-gradient(135deg, #5b5bd6, #8b5cf6);
+  }
+  .card-tag {
+    position: absolute; z-index: 2; left: 12px; top: 12px;
+    height: 24px; padding: 0 9px; border-radius: 999px;
+    display: inline-flex; align-items: center;
+    font-size: 11.5px; font-weight: 600;
+    background: rgba(255, 255, 255, .92); color: #14161c;
+  }
+  .card-tag.blank { background: rgba(20, 22, 28, .62); color: #ffd76e; }
+  .card-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; }
+  .card-body h3 { margin: 0; font-size: 16.5px; font-weight: 700; letter-spacing: -.01em; }
+  .card-body p {
+    margin: 0; color: var(--ink-2); font-size: 13.5px; line-height: 1.62;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .card-foot {
+    margin-top: 6px; display: flex; align-items: center; gap: 6px;
+    font-size: 12.5px; color: var(--accent); font-weight: 600;
+  }
+  .card-foot::after { content: "→"; transition: transform .18s ease; }
+  .card:hover .card-foot::after { transform: translateX(3px); }
+
+  /* 页脚 */
+  footer { margin: 64px 0 0; padding: 26px 0 46px; border-top: 1px solid var(--line); }
+  .foot-inner { display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline; justify-content: space-between; }
+  .foot-inner p { margin: 0; font-size: 12.5px; color: var(--ink-3); }
+  .foot-inner code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    background: var(--bg-soft); padding: 1px 5px; border-radius: 5px; font-size: 12px;
+  }
+
+  .boot-error {
+    margin: 40px 0; padding: 20px 22px; border-radius: 12px;
+    background: var(--bg-elev); border: 1px solid var(--line-strong);
+    color: var(--ink-2); font-size: 14px;
+  }
+  .boot-error b { color: var(--ink); }
+  .boot-error code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    background: var(--bg-soft); padding: 1px 5px; border-radius: 5px;
+  }
+
+  @media (max-width: 760px) {
+    .wrap { width: calc(100% - 32px); }
+    .topmeta { display: none; }
+    .hero { padding: 36px 0 4px; }
+    .grid { gap: 16px; margin-top: 28px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" id="brandMark">H</span>
+      <span class="brand-text">
+        <b id="brandTitle">我的收藏夹</b>
+        <small id="brandSub">MY COLLECTION</small>
+      </span>
+    </a>
+    <div class="topmeta">最后更新 <b id="metaUpdated">—</b> · 入口 <b id="metaCount">—</b> 个</div>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="切换主题">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path id="themeIconPath" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <span id="themeLabel">深色</span>
+    </button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="kicker">Collection</div>
+    <h1 id="heroTitle">我的收藏夹</h1>
+    <p id="heroIntro">把常用、常看、常维护的页面收在一处。</p>
+    <div class="stats" id="stats"></div>
+  </section>
+
+  <section class="grid" id="grid" aria-label="入口列表"></section>
+  <div id="bootError" class="boot-error" hidden></div>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <p id="footNote">个人站点 · 仅作收藏与索引使用</p>
+    <p>数据来自 <code>data.json</code></p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var DATA = null;
+  var $ = function (s) { return document.querySelector(s); };
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
+
+  /* ---------- 主题 ---------- */
+  var THEME_KEY = "home-theme";
+  function applyTheme(t) {
+    document.documentElement.setAttribute("data-theme", t);
+    var dark = t === "dark";
+    $("#themeLabel").textContent = dark ? "浅色" : "深色";
+    $("#themeIconPath").setAttribute("d", dark
+      ? "M12 4.5v2M12 17.5v2M4.5 12h2M17.5 12h2M6.7 6.7l1.4 1.4M15.9 15.9l1.4 1.4M17.3 6.7l-1.4 1.4M8.1 15.9l-1.4 1.4M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"
+      : "M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z");
+    try { localStorage.setItem(THEME_KEY, t); } catch (e) {}
+  }
+  (function initTheme() {
+    var saved = null;
+    try { saved = localStorage.getItem(THEME_KEY); } catch (e) {}
+    if (!saved) {
+      saved = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    applyTheme(saved);
+  })();
+  $("#themeBtn").addEventListener("click", function () {
+    var now = document.documentElement.getAttribute("data-theme");
+    applyTheme(now === "dark" ? "light" : "dark");
+  });
+
+  /* ---------- 渲染 ---------- */
+  function cardHtml(it) {
+    var img = it.image
+      ? '<img src="' + esc(it.image) + '" alt="' + esc(it.title) + '" width="640" height="400" ' +
+        "onerror=\"this.remove()\">"
+      : "";
+    var fallback = '<div class="cover-fallback">' + esc((it.title || "?").slice(0, 1)) + "</div>";
+    var tagCls = it.status === "blank" ? "card-tag blank" : "card-tag";
+    return '<article class="card">' +
+        '<a class="card-cover" href="' + esc(it.href) + '" aria-label="' + esc(it.title) + '">' +
+          img + fallback +
+          '<span class="' + tagCls + '">' + esc(it.tag || "") + "</span>" +
+        "</a>" +
+        '<div class="card-body">' +
+          '<h3><a href="' + esc(it.href) + '">' + esc(it.title) + "</a></h3>" +
+          "<p>" + esc(it.desc || "") + "</p>" +
+          '<span class="card-foot">' + esc(it.status === "blank" ? "看看占位页" : "进入") + "</span>" +
+        "</div>" +
+      "</article>";
+  }
+
+  function renderShell() {
+    var s = DATA.site || {};
+    document.title = (s.title || "我的收藏夹");
+    $("#brandTitle").textContent = s.title || "我的收藏夹";
+    $("#brandSub").textContent = s.subtitle || "";
+    $("#heroTitle").textContent = s.title || "我的收藏夹";
+    $("#heroIntro").textContent = s.intro || "";
+    $("#metaUpdated").textContent = s.updated || "—";
+    $("#metaCount").textContent = String((DATA.entries || []).length);
+    $("#footNote").textContent = s.footnote || "";
+    var ready = (DATA.entries || []).filter(function (e) { return e.status === "ready"; }).length;
+    $("#stats").innerHTML =
+      '<div class="stat"><b>' + (DATA.entries || []).length + "</b><span>个入口</span></div>" +
+      '<div class="stat"><b>' + ready + "</b><span>已上线</span></div>" +
+      '<div class="stat"><b>' + ((DATA.entries || []).length - ready) + "</b><span>占位待建</span></div>";
+  }
+
+  function renderList() {
+    $("#grid").innerHTML = (DATA.entries || []).map(cardHtml).join("");
+  }
+
+  function bootError(msg) {
+    var box = $("#bootError");
+    box.hidden = false;
+    box.innerHTML = "<b>页面读不到 data.json</b><br>" + esc(msg) +
+      "<br><br>这是浏览器的本地文件限制：直接双击打开 <code>index.html</code> 时，" +
+      "浏览器不允许读取同目录的 json。请用本地服务器打开，例如在站点目录执行 " +
+      "<code>python -m http.server 8000</code>，然后访问 <code>http://127.0.0.1:8000/</code>。";
+  }
+
+  function start() {
+    fetch("data.json", { cache: "no-store" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
+      .then(function (d) {
+        DATA = d;
+        renderShell();
+        renderList();
+      })
+      .catch(function (e) {
+        bootError(e && e.message ? e.message : String(e));
+      });
+  }
+
+  start();
+})();
+</script>
+</body>
+</html>

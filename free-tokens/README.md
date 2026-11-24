@@ -11,10 +11,10 @@ free-tokens/
 ├── index.html          # 页面壳：结构 + 样式 + 渲染逻辑（唯一需要写代码的文件）
 ├── data.json           # ★ 所有内容：站点信息、入口、攻略、更新日志
 ├── start.bat           # 本地预览一键启动（起 http 服务 + 开浏览器）
-├── images/             # 10 张卡片封面（SVG）+ favicon.svg
-├── tools/gen_covers.py # 封面批量生成脚本
-├── preview.jpg         # 首屏预览图
+├── images/             # 9 张卡片封面（SVG）+ favicon
 └── README.md
+
+封面生成脚本已经统一挪到仓库根目录的 `tools/gen_covers.py`，输出仍在 `free-tokens/images/`。
 ```
 
 ## 本地预览
@@ -127,7 +127,7 @@ free-tokens/
 优先级从高到低：
 
 1. **用现成图片**：把图片丢进 `images/`，`image` 字段改成它的文件名。任意格式，PNG/JPG/SVG 都行，建议 640×400。
-2. **重新生成全部封面**：改 `tools/gen_covers.py` 里的 `PROVIDERS` 列表（名称、域名、两个渐变色），然后运行：
+2. **重新生成全部封面**：改仓库根目录 `tools/gen_covers.py` 里的 `PROVIDERS` 列表（名称、域名、两个渐变色），然后**在仓库根目录**运行：
 
    ```bash
    python tools/gen_covers.py
