@@ -1,9 +1,9 @@
 {
   "site": {
-    "title": "我的收藏夹",
+    "title": "个人收藏夹",
     "subtitle": "MY COLLECTION",
     "tagline": "六个入口，一处常见。",
-    "intro": "把常用、常看、常维护的页面收在一处。内容全部由 data.json 驱动，改这里就能改整站。",
+    "intro": "把常用、常看、常维护的页面收在一处。",
     "updated": "2026-11-25",
     "footnote": "个人站点 · 仅作收藏与索引使用"
   },
