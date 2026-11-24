@@ -189,7 +189,7 @@ git push
 
 ### 缓存说明
 
-目录里的 `_headers` 是 Cloudflare Pages 的响应头配置：`data.json` 和 `index.html` 设成 `no-cache`，保证改完刷新就生效；`images/*` 缓存一天。别的平台不认这个文件，删掉也不影响页面。
+仓库根目录的 `_headers`（部署时对所有路径生效）是 Cloudflare Pages 的响应头配置：`data.json` 和 `index.html` 设成 `no-cache`，保证改完刷新就生效；`images/*` 缓存一天。别的平台不认这个文件，删掉也不影响页面。
 
 ## 免责声明
 
