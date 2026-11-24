@@ -2,12 +2,12 @@
 """
 生成个人主页的封面 SVG（640x400）。
 用法：python tools/gen_covers_home.py
-说明：这个脚本放在站点目录之外（home/ 里只留 html / json / images）。
+说明：这个脚本放在站点目录之外（站点目录只留 html / json / images）。
 """
 import os
 import math
 
-OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "home", "images")
+OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "images")
 
 COVERS = [
     ("tokens", "白", "免费 Tokens 白嫖攻略", "#2B4BF2", "#5C7CFF"),

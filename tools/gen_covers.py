@@ -71,8 +71,8 @@ def main():
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     out_dir = os.path.join(root, "free-tokens", "images")
     os.makedirs(out_dir, exist_ok=True)
-    # 收藏夹（home/）是单文件站点，封面图也放一份在自己的 images/ 里
-    home_dir = os.path.join(root, "home", "images")
+    # 收藏夹是根目录站点，封面图放一份在根目录 images/ 里
+    home_dir = os.path.join(root, "images")
     os.makedirs(home_dir, exist_ok=True)
     for pid, name, c1, c2, glyph, domain in PROVIDERS:
         n = len(name)

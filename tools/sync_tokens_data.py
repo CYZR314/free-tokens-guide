@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-把 free-tokens/data.json 里的 Tokens 内容同步进 home/data.json 的 "tokens" 段。
+把 free-tokens/data.json 里的 Tokens 内容同步进根目录 data.json 的 "tokens" 段。
 
 为什么需要它：Tokens 站（free-tokens/）还单独在线，所以它的数据是主副本；
-收藏夹（home/）是一个单文件站点，数据只能放在自己的 data.json 里。
+收藏夹是根目录的单页应用，它的数据放在根目录 data.json 里。
 改完 free-tokens/data.json 之后跑一次这个脚本，收藏夹里的那份就跟着更新。
 
 用法（在仓库根目录 H:\\dsh-jb\\git 下执行）：
     python tools/sync_tokens_data.py
 
-只动 home/data.json 的 "tokens" 字段，site / entries / resume 三个字段完全不动。
+只动根目录 data.json 的 "tokens" 字段，site / entries / resume 三个字段完全不动。
 """
 
 import json
@@ -24,7 +24,7 @@ except Exception:
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "free-tokens", "data.json")
-DST = os.path.join(ROOT, "home", "data.json")
+DST = os.path.join(ROOT, "data.json")
 
 
 def main():
