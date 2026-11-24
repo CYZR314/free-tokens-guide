@@ -4,7 +4,7 @@
     "subtitle": "FREE TOKENS",
     "tagline": "收录真能到账的代金券和免费额度",
     "intro": "这里只留真金白银的东西：注册就送的代金券、学生能领的大额券、长期免费的模型额度。没有「可能送」「大概有」，每一条都写清楚能领多少。额度与规则以官网为准，领之前去页面确认一眼。",
-    "updated": "2026-11-23",
+    "updated": "2026-11-24",
     "disclaimer": "本站只做入口整理和流程记录，不代领、不转卖、不提供任何账号。代金券与免费额度均由各平台发放，规则随时可能调整，以官网页面为准。",
     "howToUpdate": "改 data.json 即可：加一条 items、调 level、改 note 和 guide。页面上的计数和排序都会自动跟着变。"
   },
@@ -325,40 +325,6 @@
         "watch": [
           "Lite 能力有限，复杂推理和长文会明显掉链子",
           "免费额度受 QPS 限制，并发一高就排队"
-        ]
-      }
-    },
-    {
-      "id": "aistudio",
-      "name": "Google AI Studio",
-      "url": "https://aistudio.google.com/",
-      "domain": "aistudio.google.com",
-      "image": "images/aistudio.svg",
-      "badge": "免费层",
-      "level": 3,
-      "credits": { "type": "quota", "value": "免费层", "label": "Gemini 按分钟 / 每天限速，不用信用卡" },
-      "note": "不用绑信用卡就能拿到 key，Gemini 免费层按每分钟和每天请求数限速，上下文窗口很长。",
-      "tags": ["免信用卡", "长上下文", "限速"],
-      "guide": {
-        "summary": "不花钱就能试长上下文能力。",
-        "steps": [
-          "用 Google 账号登录 Google AI Studio",
-          "点「Get API key」创建密钥，不需要绑卡",
-          "在模型列表里选一个支持免费层的 Gemini 模型"
-        ],
-        "usage": [
-          "创建APIkey，接进你的agent",
-          "按官方 SDK 或 REST 调用，注意 RPM / RPD",
-          "超限会返回 429，代码里加重试和降级"
-        ],
-        "models": [
-          "Gemini Flash 系列",
-          "Gemini Flash-Lite",
-          "Gemini Pro 系列（免费层额度更少）"
-        ],
-        "watch": [
-          "免费层的输入输出可能被用于改进产品，敏感数据别喂",
-          "按分钟和按天双重限速，跑批量任务要控速"
         ]
       }
     }
