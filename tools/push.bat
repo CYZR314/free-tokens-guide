@@ -1,6 +1,6 @@
 @echo off
 chcp 65001 >nul
-cd /d "%~dp0"
+cd /d "%~dp0.."
 title 上传到 GitHub + Cloudflare
 echo ==========================================
 echo   一键上传（改了 data.json 就跑这个）

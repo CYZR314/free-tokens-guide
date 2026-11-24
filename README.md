@@ -25,16 +25,14 @@
 │   ├── start.bat              #   单独预览这个站（8123 端口）
 │   └── README.md
 │
-├── tools/                     # 脚本，都在仓库根目录运行
-│   ├── gen_covers.py          #   生成 9 张 Tokens 封面（根 images/ 和 free-tokens/images/ 各写一份）
-│   ├── gen_covers_home.py     #   生成收藏夹自己的 6 张封面
-│   └── sync_tokens_data.py    #   把 free-tokens/data.json 同步进根 data.json 的 tokens 段
-│
-├── push.bat                   # 双击 = 提交 + 上传（推荐）
-├── push.py                    # 上传脚本：git push → 失败自动改走 GitHub API
-├── preview.bat                # 双击 = 本地预览（8124 端口）
-├── .secrets/                  # 本地 GitHub token（已被 .gitignore 忽略）
-└── .preview/                  # 截图草稿（已被 .gitignore 忽略）
+└── tools/                     # 工具都放这里，双击 .bat 即可
+    ├── push.bat               #   双击 = 提交 + 上传（推荐）
+    ├── push.py                #   上传脚本：git push → 失败自动改走 GitHub API
+    ├── preview.bat            #   双击 = 本地预览（8124 端口）
+    ├── gen_covers.py          #   生成 9 张 Tokens 封面（根 images/ 和 free-tokens/images/ 各写一份）
+    ├── gen_covers_home.py     #   生成收藏夹自己的 6 张封面
+    ├── sync_tokens_data.py    #   把 free-tokens/data.json 同步进根 data.json 的 tokens 段
+    └── .secrets/              #   本地 GitHub token（已被 .gitignore 忽略）
 ```
 
 ## 收藏夹里有什么
@@ -65,7 +63,7 @@
 | 想改什么 | 改哪个文件 | 然后 |
 | --- | --- | --- |
 | 六个入口的标题、说明、链接 | `data.json` → `entries` | 刷新页面 |
-| 免费 Tokens 的入口、额度、攻略 | `free-tokens/data.json` | 跑一次 `python tools/sync_tokens_data.py`，再双击 `push.bat` |
+| 免费 Tokens 的入口、额度、攻略 | `free-tokens/data.json` | 跑一次 `python tools/sync_tokens_data.py`，再双击 `tools/push.bat` |
 | 简历内容 | `data.json` → `resume` | 刷新页面 |
 | 占位页要换成真页面 | `data.json` 里那条的 `href` | 改成 `#/xxx`，再在 `index.html` 的路由里加一个分支 |
 | 封面图 | `python tools/gen_covers.py` 或直接换 `images/` 里的图 | 建议 640×400 |
@@ -74,14 +72,14 @@
 
 ## 本地预览
 
-- `preview.bat` → <http://127.0.0.1:8124/>（收藏夹）与 <http://127.0.0.1:8124/free-tokens/>（白嫖清单）
+- `tools/preview.bat` → <http://127.0.0.1:8124/>（收藏夹）与 <http://127.0.0.1:8124/free-tokens/>（白嫖清单）
 - `free-tokens/start.bat` → <http://127.0.0.1:8123/>（只预览白嫖清单）
 
 页面用 `fetch` 读 json，**直接双击 html 打不开**（浏览器不让 `file://` 读 json），必须走本地服务。
 
-## 上传（为什么用 push.bat 而不是 VS Code 的推送按钮）
+## 上传（为什么用 tools/push.bat 而不是 VS Code 的推送按钮）
 
-这台机器访问 `github.com:443` 时通时不通，VS Code 的「同步」只走 `git push`，经常报 `Failed to connect to github.com:443`。双击 `push.bat` 会：
+这台机器访问 `github.com:443` 时通时不通，VS Code 的「同步」只走 `git push`，经常报 `Failed to connect to github.com:443`。双击 `tools/push.bat` 会：
 
 1. 清理 Windows 保留名垃圾文件（`CON` 之类会让 `git add` 失败）
 2. 自动提交（message 用当前时间）
