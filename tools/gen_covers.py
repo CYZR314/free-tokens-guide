@@ -71,6 +71,9 @@ def main():
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     out_dir = os.path.join(root, "free-tokens", "images")
     os.makedirs(out_dir, exist_ok=True)
+    # 收藏夹（home/）是单文件站点，封面图也放一份在自己的 images/ 里
+    home_dir = os.path.join(root, "home", "images")
+    os.makedirs(home_dir, exist_ok=True)
     for pid, name, c1, c2, glyph, domain in PROVIDERS:
         n = len(name)
         size = 44 if n <= 10 else (38 if n <= 16 else 31)
@@ -84,6 +87,8 @@ def main():
             nsize=size, nsize_y=330 if size >= 38 else 332,
         )
         with open(os.path.join(out_dir, pid + ".svg"), "w", encoding="utf-8") as f:
+            f.write(svg)
+        with open(os.path.join(home_dir, pid + ".svg"), "w", encoding="utf-8") as f:
             f.write(svg)
         print("wrote", pid + ".svg", "ink=" + ink)
 
